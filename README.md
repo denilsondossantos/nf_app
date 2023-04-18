@@ -1,6 +1,6 @@
-# flutter_application_1
+# App Nota Fiscal
 
-A new Flutter project.
+Este projeto tem o intuito de tornar mais pratico o controle de compras através do registro das notas fiscais.
 
 ## Getting Started
 
