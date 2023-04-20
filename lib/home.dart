@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'qrcode.dart';
 import 'http.dart';
 
+import 'package:flutter/material.dart';
+
 
 void main() => runApp(const MyApp());
 
@@ -27,23 +29,38 @@ class MyStatefulWidget extends StatefulWidget {
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
+
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  
+  
+  List <String> items = ['negao','salame', 'chupeta'];
+  
+  //items[0] = 'negao';
+  
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
+  static  TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
+  static  List<Widget> _widgetOptions = <Widget>[
+   
+        ListView.builder(
+          itemCount: 10,
+          prototypeItem: ListTile(
+            title: Text('items'),
+          ),
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text('Item: ${index}'),
+            );
+          },
+        ),
+     Text(
+      'Você ainda não cadastrou nenhuma nota',
       style: optionStyle,
     ),
     Text(
       'Index 2: School',
       style: optionStyle,
-    ),
+    )
   ];
 
   void _onItemTapped(int index) {
