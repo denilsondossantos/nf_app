@@ -19,7 +19,7 @@ class _ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     List<Produto> produto = [];
     Map<String, dynamic> json = jsonDecode(widget.data);
-    var info =  Nota.fromJson(json['InfoNota']);
+    //var info =  Nota.fromJson(json['InfoNota']);
     for(int i=0; i< json['InfoItens'].length; i++ ){
       produto.add(Produto.fromJson(json['InfoItens'][i]));
     }

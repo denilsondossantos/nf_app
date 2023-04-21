@@ -1,15 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'qrcode.dart';
-import 'http.dart';
-
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
 
-void main() => runApp(const MyApp());
+//void main() => runApp(const MyHome());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyHome extends StatelessWidget {
+  const MyHome({super.key});
 
   static const String _title = 'Flutter Code Sample';
 
@@ -31,41 +28,63 @@ class MyStatefulWidget extends StatefulWidget {
 
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  
-  
   List <String> items = ['negao','salame', 'chupeta'];
-  
-  //items[0] = 'negao';
-  
   int _selectedIndex = 0;
-  static  TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static  List<Widget> _widgetOptions = <Widget>[
-   
-        ListView.builder(
-          itemCount: 10,
-          prototypeItem: ListTile(
-            title: Text('items'),
-          ),
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('Item: ${index}'),
-            );
-          },
-        ),
-     Text(
-      'Você ainda não cadastrou nenhuma nota',
+  //var _height;
+
+
+  static const  TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  final  List<Widget> _widgetOptions = <Widget>[
+  Container(
+    color: Colors.redAccent,
+    alignment: Alignment.center,
+    child: const Text(
+      'teste container', 
       style: optionStyle,
     ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    )
+  ),
+  Column( 
+    children:<Widget>[
+        Container(
+          height: 300,
+          color: Colors.amber[300],
+          alignment: Alignment.topCenter,
+          child: const Text('Você não cadastrou\n nenhuma nota'),
+        ),
+
+         Container(
+          color: Colors.red.shade50,
+          alignment: Alignment.bottomCenter,
+          child: FloatingActionButton(
+          onPressed:((){
+            log('ola');    
+            //_aqui dveria chamar a tela de qr code  
+            }),
+          child:  const Icon(Icons.add),
+        ),
+        ),
+
+      ],
+    ),
+
+  const Text(
+    'Index 2: School',
+    style: optionStyle,
+  ),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void chupaRola(){
+    setState(() {
+    Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const QRViewExample(),
+    ));  
     });
   }
 
@@ -81,12 +100,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.account_balance_wallet_rounded),
+            label: 'Info',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outlined),
-            label: 'Add',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
@@ -94,7 +113,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.cyan.shade600,
         onTap: _onItemTapped,
       ),
     );

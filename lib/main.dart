@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'qrcode.dart';
-import 'http.dart';
+import 'home.dart';
 void main() => runApp(const MaterialApp(home: MyHome()));
 
+
+
+/*
 class MyHome extends StatelessWidget {
   const MyHome({Key? key}) : super(key: key);
 
@@ -44,4 +46,4 @@ class MyHome extends StatelessWidget {
       ),
     );
   }
-}
+}*/
