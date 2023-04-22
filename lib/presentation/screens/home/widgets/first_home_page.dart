@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/widgets/loading_button.dart';
+import 'package:flutter_application_1/presentation/widgets/qrcode_widget.dart';
 
 import '../../../widgets/empty.dart';
 
@@ -15,7 +16,9 @@ class FirstHomePage extends StatelessWidget {
           LoadingButton(
             width: 200.0,
             text: 'Ler QR',
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => QRViewExample()));
+            },
             icon: const Icon(Icons.qr_code),
           ),
           const SizedBox(height: 80.0),

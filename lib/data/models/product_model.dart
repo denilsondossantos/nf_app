@@ -19,7 +19,7 @@ class ProductModel {
     return ProductModel(
       codigo: json['codigo'],
       descricao: json['descricao'],
-      qntd: json['qntde'],
+      qntd: json['qntd'],
       tipo: json['tipo'],
       vUnit: json['vUnit'],
       vTotal: json['vTotal'],
@@ -29,7 +29,7 @@ class ProductModel {
   Map<String, dynamic> toJson() => {
         'codigo': codigo,
         'descricao': descricao,
-        'qntde': qntd,
+        'qntd': qntd,
         'tipo': tipo,
         'vUnit': vUnit,
         'vTotal': vTotal,
