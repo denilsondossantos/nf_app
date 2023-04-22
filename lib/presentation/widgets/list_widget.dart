@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'json.dart';
+import 'package:flutter_application_1/data/models/product_model.dart';
 import 'dart:convert';
 
 
@@ -17,18 +17,16 @@ class _ListScreenState extends State<ListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Produto> produto = [];
+    List<ProductModel> produto = [];
     Map<String, dynamic> json = jsonDecode(widget.data);
     //var info =  Nota.fromJson(json['InfoNota']);
     for(int i=0; i< json['InfoItens'].length; i++ ){
-      produto.add(Produto.fromJson(json['InfoItens'][i]));
+      produto.add(ProductModel.fromJson(json['InfoItens'][i]));
     }
 
     const title = 'Lista de Produtos';
 
-    return MaterialApp(
-      title: title,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text(title),
         ),
@@ -61,8 +59,7 @@ class _ListScreenState extends State<ListScreen> {
             );
           },
         ),*/
-      ),
-    );
+      );
   }
 }
 

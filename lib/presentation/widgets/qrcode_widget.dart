@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'http.dart';
-import 'list.dart';
+import 'package:flutter_application_1/presentation/widgets/http_widget.dart';
+import 'list_widget.dart';
 
 class QRViewExample extends StatefulWidget {
   const QRViewExample({Key? key}) : super(key: key);
@@ -75,7 +75,7 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
 
-        if(result != null) {
+        if (result != null) {
           log('${result!.code}');
           controller.pauseCamera();
           coletaDados(result!.code as String);
@@ -94,12 +94,12 @@ class _QRViewExampleState extends State<QRViewExample> {
     }
   }
 
-  void coletaDados(String data ) async{
-    await capturaItens(data).then((value){
-    log(value);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ListScreen(data: value)));}
-    );
-  
+  void coletaDados(String data) async {
+    await capturaItens(data).then((value) {
+      log(value);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ListScreen(data: value)));
+    });
   }
 
   @override

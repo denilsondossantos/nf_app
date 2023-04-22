@@ -1,49 +1,41 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
-void main() => runApp(const MaterialApp(home: MyHome()));
+import 'package:flutter_application_1/presentation/router/router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/theme/dark.dart';
+import 'core/theme/light.dart';
+import 'presentation/screens/home/home_page.dart';
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  runApp(
+    ProviderScope(
+      child: MyApp(savedThemeMode: savedThemeMode),
+    ),
+  );
+}
 
-
-/*
-class MyHome extends StatelessWidget {
-  const MyHome({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  final AdaptiveThemeMode? savedThemeMode;
+  const MyApp({
+    Key? key,
+    this.savedThemeMode,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Cadastro NF')),
-      body: Column(
-
-        children:<Widget>[
-                ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const QRViewExample(),
-            ));
-          },
-          child: const Text('Escanear'),
-        ),
-
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () async{
-                await capturaItens('https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx?p=43230492754738016328650270001165211982273520|2|1|1|8ea2be1645c0fc15ad39ab32a2f2eff6b5eb24ba')
-                .then((value) => print(""));
-          },
-          child: const Text('Debug list'),
-        ),
-
-        ],
-        
-         /*ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const QRViewExample(),
-            ));
-          },
-          child: const Text('Escanear'),
-        ),*/
+    return AdaptiveTheme(
+      dark: darkTheme(),
+      light: lightTheme(),
+      initial: savedThemeMode ?? AdaptiveThemeMode.light,
+      builder: (light, dark) => MaterialApp(
+        routes: Routes.getRoute(),
+        title: 'NF-e Reader',
+        theme: light,
+        darkTheme: dark,
+        home: const HomePage(),
       ),
     );
   }
-}*/
+}
