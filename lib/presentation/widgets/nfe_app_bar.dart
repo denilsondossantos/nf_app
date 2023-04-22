@@ -1,12 +1,13 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NFeAppBar extends StatefulWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
+  final String title;
   const NFeAppBar({
     super.key,
     this.bottom,
+    required this.title,
   });
 
   @override
@@ -20,7 +21,7 @@ class _NFeAppBarState extends State<NFeAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('NF-e Reader'),
+      title: Text(widget.title),
       centerTitle: true,
       bottom: widget.bottom,
       actions: const [
@@ -45,6 +46,7 @@ class PopupMenu extends StatelessWidget {
           padding: EdgeInsets.zero,
           value: 1,
           enabled: true,
+          onTap: null,
           child: Column(
             children: [
               ListTile(
