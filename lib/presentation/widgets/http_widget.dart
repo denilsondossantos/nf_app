@@ -105,6 +105,7 @@ import 'dart:developer';
     try {
       dataNota[infosNota[5]] = itens[positionArray + 1]; //pega valor total
       dataNota[infosNota[6]] = itens[positionArray + 3]; //pega desconto
+      dataNota['id'] = contentString;
 
       for (var i = 0; i <= itens.length; i++) {
         itensCompra[cont][infoItens[contInfoNota]] = itens[i];

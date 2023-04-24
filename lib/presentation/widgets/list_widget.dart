@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/models/invoice_model.dart';
+import 'package:flutter_application_1/data/models/note_model.dart';
 import 'package:flutter_application_1/data/models/product_model.dart';
 import 'dart:convert';
+import 'package:hive/hive.dart';
+import 'dart:developer';
 
 class ListScreen extends StatefulWidget {
   final String data;
@@ -14,20 +18,54 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
+   var _box;
+   var nf;
+   String title = 'Lista de Produtos';
+   List<ProductModel> produto = [];
+   Map<String, dynamic> json = <String,dynamic>{};
+
   @override
-  Widget build(BuildContext context) {
-    List<ProductModel> produto = [];
-    Map<String, dynamic> json = jsonDecode(widget.data);
-    //var info =  Nota.fromJson(json['InfoNota']);
-    for (int i = 0; i < json['InfoItens'].length; i++) {
+  void initState() {
+     _box = Hive.box('nfBox');
+     builNote();
+     _writeNewValue(nf);
+     _readLatestValue();
+    super.initState();
+  }
+
+  //functions
+  void _writeNewValue(NoteModel nota) {
+    try{
+      _box.put('0', nota);
+    }catch(error){
+      log('message error: $error');
+    }
+  }
+
+  void _readLatestValue() {
+    try{
+    var dados = _box.get('0');
+    dados != null ? log('testeBox: ${dados.nota.local}') : log('Sem dados na memória');
+    }catch(error){
+      log('error message: $error');
+    }
+  }
+
+  void builNote(){
+    json = jsonDecode(widget.data);
+     for (int i = 0; i < json['InfoItens'].length; i++) {
       produto.add(ProductModel.fromJson(json['InfoItens'][i]));
     }
+    InvoiceModel info  = InvoiceModel.fromJson(json['InfoNota']);
+    nf = NoteModel(nota: info, produto: produto);
+   }
 
-    const title = 'Lista de Produtos';
+  @override
+  Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(title),
+        title:  Text(title),
       ),
       body: ListView.builder(
         itemCount: produto.length,
@@ -41,22 +79,12 @@ class _ListScreenState extends State<ListScreen> {
                   Text('Quantidade: ${produto[index].qntd}'),
                   const SizedBox(width: 30),
                   Text('R\$: ${produto[index].vUnit}'),
-
-                  //Icon(Icons.sentiment_very_satisfied),
                 ],
               ),
-              //trailing: Icon(Icons.local_grocery_store_outlined ),
             ),
           );
         },
       ),
-      /*ListTile(
-                leading: Icon(Icons.),
-                title: Text(produto[index].descricao),
-                subtitle: Text(produto[index].vUnit),
-            );
-          },
-        ),*/
     );
   }
 }

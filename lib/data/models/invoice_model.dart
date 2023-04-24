@@ -6,6 +6,7 @@ class InvoiceModel {
   final String cpf;
   final String vTotal;
   final String desconto;
+  final String id;
 
   InvoiceModel({
     required this.cnpj,
@@ -15,6 +16,7 @@ class InvoiceModel {
     required this.cpf,
     required this.vTotal,
     required this.desconto,
+    required this.id,
   });
 
   factory InvoiceModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class InvoiceModel {
       cpf: json['cpf'],
       vTotal: json['vTotal'],
       desconto: json['desconto'],
+      id: json['id'],
     );
   }
 
@@ -37,5 +40,6 @@ class InvoiceModel {
         'cpf': cpf,
         'vTotal': vTotal,
         'desconto': desconto,
+        'id': id,
       };
 }

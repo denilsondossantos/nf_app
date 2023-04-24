@@ -23,7 +23,7 @@ class FirstHomePage extends StatelessWidget {
           ),
           const SizedBox(height: 80.0),
           const Empty(
-            textWorning: 'Nenhuma nota fiscal sendo cadastrada no momento.',
+            textWorning: 'Nenhuma nota fiscal cadastrada até o momento.',
           ),
         ],
       ),

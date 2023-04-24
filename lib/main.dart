@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/dark.dart';
 import 'core/theme/light.dart';
 import 'presentation/screens/home/home_page.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  var box = await Hive.openBox('nfBox');
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   runApp(
     ProviderScope(

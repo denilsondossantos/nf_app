@@ -67,7 +67,7 @@ class _HomePageViewState extends State<HomePageView>
                 controller: _tabController,
                 tabs: const [
                   Tab(
-                    text: 'Cadasto nota',
+                    text: 'Cadastrar nota',
                     icon: Icon(Icons.qr_code_scanner, size: 26),
                   ),
                   Tab(
