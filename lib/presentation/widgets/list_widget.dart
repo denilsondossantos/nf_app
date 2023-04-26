@@ -28,28 +28,29 @@ class _ListScreenState extends State<ListScreen> {
   void initState() {
      _box = Hive.box('nfBox');
      builNote();
-     _writeNewValue(nf);
-     _readLatestValue();
+     _writeNewValue(widget.data);
     super.initState();
   }
 
   //functions
-  void _writeNewValue(NoteModel nota) {
+  void _writeNewValue(String nota) {
     try{
-      _box.put('0', nota);
+      //_box.put('0', nota);
+      _box.add(nota);
     }catch(error){
       log('message error: $error');
     }
   }
 
+  /*
   void _readLatestValue() {
     try{
-    var dados = _box.get('0');
-    dados != null ? log('testeBox: ${dados.nota.local}') : log('Sem dados na memória');
+    var dados = _box.get(1);
+    dados != null ? log('testeBox: ${dados}') : log('Sem dados na memória');
     }catch(error){
       log('error message: $error');
     }
-  }
+  }*/
 
   void builNote(){
     json = jsonDecode(widget.data);
