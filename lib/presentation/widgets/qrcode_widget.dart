@@ -90,7 +90,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     await capturaItens(data).then((value) {
       log(value);
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ListScreen(data: value)));
+          MaterialPageRoute(builder: (context) => ListScreen(data: value, saveNote: true,)));
     });
   }
 

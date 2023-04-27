@@ -8,10 +8,12 @@ import 'dart:developer';
 
 class ListScreen extends StatefulWidget {
   final String data;
+  final bool saveNote;
 
   const ListScreen({
     super.key,
     required this.data,
+    required this.saveNote,
   });
   @override
   State<ListScreen> createState() => _ListScreenState();
@@ -28,7 +30,7 @@ class _ListScreenState extends State<ListScreen> {
   void initState() {
      _box = Hive.box('nfBox');
      builNote();
-     _writeNewValue(widget.data);
+     if(widget.saveNote == true){_writeNewValue(widget.data);}
     super.initState();
   }
 

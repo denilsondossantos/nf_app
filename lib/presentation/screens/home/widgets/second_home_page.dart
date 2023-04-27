@@ -3,6 +3,7 @@ import 'package:flutter_application_1/data/models/invoice_model.dart';
 import 'package:hive/hive.dart';
 import 'dart:developer';
 import 'dart:convert';
+import '../../../widgets/list_widget.dart';
 class SecondHomePage extends StatefulWidget {
 
 
@@ -35,6 +36,7 @@ class _SecondHomePageState extends State<SecondHomePage> {
               leading: const Icon(Icons.store, size: 30,),
               title: Text(listaNf[index].local),
               subtitle: Text('Valor total R\$: ${listaNf[index].vTotal}  Data: ${listaNf[index].data} ', textAlign: TextAlign.left,),
+              onTap: () => viewList(_box.get(index+1)),
             ),
           );},
       ),
@@ -58,6 +60,13 @@ class _SecondHomePageState extends State<SecondHomePage> {
           log('Não faz absolutamente nada')
         };
       } 
+    }
+
+
+    //recebe o indice da String
+    void viewList(String value){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ListScreen(data: value, saveNote: false,)));
     }
 
   }
