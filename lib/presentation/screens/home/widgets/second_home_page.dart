@@ -36,7 +36,7 @@ class _SecondHomePageState extends State<SecondHomePage> {
               leading: const Icon(Icons.store, size: 30,),
               title: Text(listaNf[index].local),
               subtitle: Text('Valor total R\$: ${listaNf[index].vTotal}  Data: ${listaNf[index].data} ', textAlign: TextAlign.left,),
-              onTap: () => viewList(_box.get(index+1)),
+              onTap: () => viewList(_box.get(index)),
             ),
           );},
       ),
@@ -47,7 +47,7 @@ class _SecondHomePageState extends State<SecondHomePage> {
       try{
       List<InvoiceModel> lista = [];
       Map <String, dynamic>  json; 
-      for(int i = 1; i < _box.length; i++){
+      for(int i = 0; i < _box.length; i++){
         json  = jsonDecode(_box.get(i));
         lista.add(InvoiceModel.fromJson(json['InfoNota']));  
       }

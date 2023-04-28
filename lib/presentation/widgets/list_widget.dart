@@ -21,7 +21,7 @@ class ListScreen extends StatefulWidget {
 
 class _ListScreenState extends State<ListScreen> {
    var _box;
-   var nf;
+   late NoteModel nf;
    String title = 'Lista de Produtos';
    List<ProductModel> produto = [];
    Map<String, dynamic> json = <String,dynamic>{};
@@ -34,35 +34,6 @@ class _ListScreenState extends State<ListScreen> {
     super.initState();
   }
 
-  //functions
-  void _writeNewValue(String nota) {
-    try{
-      //_box.put('0', nota);
-      _box.add(nota);
-    }catch(error){
-      log('message error: $error');
-    }
-  }
-
-  /*
-  void _readLatestValue() {
-    try{
-    var dados = _box.get(1);
-    dados != null ? log('testeBox: ${dados}') : log('Sem dados na memória');
-    }catch(error){
-      log('error message: $error');
-    }
-  }*/
-
-  void builNote(){
-    json = jsonDecode(widget.data);
-     for (int i = 0; i < json['InfoItens'].length; i++) {
-      produto.add(ProductModel.fromJson(json['InfoItens'][i]));
-    }
-    InvoiceModel info  = InvoiceModel.fromJson(json['InfoNota']);
-    nf = NoteModel(nota: info, produto: produto);
-   }
-
   @override
   Widget build(BuildContext context) {
 
@@ -70,7 +41,9 @@ class _ListScreenState extends State<ListScreen> {
       appBar: AppBar(
         title:  Text(title),
       ),
-      body: ListView.builder(
+      body: Column(children:[
+      Expanded(child: ListView.builder(
+        shrinkWrap: true,
         itemCount: produto.length,
         itemBuilder: (context, index) {
           return Card(
@@ -88,6 +61,66 @@ class _ListScreenState extends State<ListScreen> {
           );
         },
       ),
+      ),
+      Row(children:[
+        Container(
+         padding: const EdgeInsets.all(3.0), 
+         margin: const EdgeInsets.all(3),
+         decoration:  BoxDecoration(
+            border: Border.all(
+              color: Colors.black,
+              width: 2,
+            ),
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.grey.shade100, Colors.grey.shade200, Colors.grey.shade300] ,  
+              ),
+            ),
+         child: Text(' Total: R\$ ${nf.nota.vTotal}',
+         style: const TextStyle(fontSize: 20),), 
+        ),
+
+        Container(
+        padding: const EdgeInsets.all(3.0), 
+        margin: const EdgeInsets.all(3),
+        decoration:  BoxDecoration(
+            border: Border.all(
+              color: Colors.black,
+              width: 2,
+            ),
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.grey.shade100, Colors.grey.shade200, Colors.grey.shade300] ,  
+              ),
+            ),
+         child: Text('Desconto: R\$ ${nf.nota.desconto}',
+         style: const TextStyle(fontSize: 20),
+         ),  
+        ),   
+      ]), 
+      ]),
     );
   }
+
+    //functions
+  void _writeNewValue(String nota) {
+    try{
+      //_box.put('0', nota);
+      _box.add(nota);
+    }catch(error){
+      log('message error: $error');
+    }
+  }
+
+  void builNote(){
+    json = jsonDecode(widget.data);
+     for (int i = 0; i < json['InfoItens'].length; i++) {
+      produto.add(ProductModel.fromJson(json['InfoItens'][i]));
+    }
+    InvoiceModel info  = InvoiceModel.fromJson(json['InfoNota']);
+    nf = NoteModel(nota: info, produto: produto);
+  }
+
 }
