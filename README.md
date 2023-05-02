@@ -5,7 +5,7 @@ Até o momento só está funcionando no Estado do Rio Grande do Sul.
 
 ----
 ## Tecnologias
-- [http: Utilzado para realizar a coleta dos dados](https://pub.dev/packages/http)
+- [http: Utilizado para realizar a coleta dos dados](https://pub.dev/packages/http)
 - [hive: Banco de dados interno](https://pub.dev/packages/hive)
 - [qr_code_scanner: Realizar leitura dos arquivos qr code](https://pub.dev/packages/qr_code_scanner)
 ----
